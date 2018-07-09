@@ -18,7 +18,7 @@ def check_affirmation(sentence):
             break
 
     if affirmative == -2:
-        return sentiment
+        return 'NOR'
     elif affirmative == 1:
         return 'YES'
 

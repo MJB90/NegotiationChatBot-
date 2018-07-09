@@ -7,10 +7,10 @@ from decideResponse import responseDecider
 is_first = True
 app = Flask(__name__)
 
-# english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
-#
-# english_bot.set_trainer(ChatterBotCorpusTrainer)
-# english_bot.train("chatterbot.corpus.english")
+english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
+
+english_bot.set_trainer(ChatterBotCorpusTrainer)
+english_bot.train("chatterbot.corpus.english")
 
 
 @app.route("/")
@@ -29,8 +29,10 @@ def get_bot_response():
         payment = extract_info.run_extract_info(str(user_text))
 
     msg = responseDecider.response(user_text, payment)
-
-    return msg
+    if len(msg)>0:
+        return msg
+    else:
+        return str(english_bot.get_response(user_text))
 
     # return str(english_bot.get_response(userText))
 
