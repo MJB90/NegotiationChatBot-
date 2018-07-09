@@ -21,13 +21,17 @@ def get_user_details(df, name):
 
     total_bill = 0
     total_payment = 0
+    # Calculating due amount for 7 months
     for i in range(7):
         month = i + 1
         bill = "RANK" + str(month) + "_BILLED_TOTAL_AMT"
         payment = "RANK" + str(month) + "_PAYMENT_AMT"
         total_bill += row[bill]
         total_payment += row[payment]
+
+    # Payment left to be paid
     payment_left = float(total_bill - total_payment)
+    payment_left = round(payment_left, 2)
     if payment_left < 0:
         payment_left = 0
     return payment_left
