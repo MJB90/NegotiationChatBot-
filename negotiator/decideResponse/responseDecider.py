@@ -1,36 +1,28 @@
-import os
+from decideResponse import affirmative_or_negative
+from decideResponse import response_tree
 
 is_first = True
-pos_response = []
-neg_response = []
-
-
-def extract_responses():
-    global pos_response, neg_response
-    cwd = os.getcwd()
-    cwd = cwd.replace("decideResponse", "")
-    data_pos = cwd + "\\data\\positive_responses.txt"
-    data_neg = cwd + "\\data\\negative_responses.txt"
-    file_pos = open(data_pos, 'r')
-    file_neg = open(data_neg, 'r')
-
-    for line in file_pos:
-        pos_response.append(str(line))
-
-    for line in file_neg:
-        neg_response.append(str(line))
+root = None
 
 
 def response(msg, payment):
-    global is_first, pos_response, neg_response
-    return_msg = ""
+    global is_first, root
     if is_first:
-        extract_responses()
         is_first = False
-        return_msg = "You have a due of " + str(payment) + " rupees."
-        return_msg += "Are you willing to pay the amount for continued services!"
+        root = response_tree.create_tree(payment)
+        return_msg = root.data
+    else:
+        affirmative = affirmative_or_negative.check_affirmation(msg)
 
+        if affirmative == 'YES':
+            root = root.right
+            return_msg = root.data
+        else:
+            root = root.left
+            return_msg = root.data
     return return_msg
 
 
-extract_responses()
+
+
+

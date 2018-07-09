@@ -4,6 +4,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 from dataExtractor import extract_info
 from decideResponse import responseDecider
 
+is_first = True
 app = Flask(__name__)
 
 # english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
@@ -21,8 +22,11 @@ def home():
 def get_bot_response():
 
     user_text = request.args.get('msg')
-
-    payment = extract_info.run_extract_info(str(user_text))
+    payment = 0
+    global is_first
+    if is_first:
+        is_first = False
+        payment = extract_info.run_extract_info(str(user_text))
 
     msg = responseDecider.response(user_text, payment)
 
