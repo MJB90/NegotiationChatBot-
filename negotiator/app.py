@@ -29,7 +29,7 @@ def get_bot_response():
         payment = extract_info.run_extract_info(str(user_text))
 
     msg = responseDecider.response(user_text, payment)
-    if len(msg)>0:
+    if len(msg) > 0:
         return msg
     else:
         return str(english_bot.get_response(user_text))
