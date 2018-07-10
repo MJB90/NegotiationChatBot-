@@ -19,10 +19,10 @@ def response(msg, payment):
         affirmative = affirmative_or_negative.check_affirmation(msg)
 
         if affirmative == 'YES' and normal_conversation == 0:
-            root = root.right
+            root = root.child['yes']
             return_msg = root.data
         elif affirmative == 'NO' and normal_conversation == 0:
-            root = root.left
+            root = root.child['no']
             return_msg = root.data
         else:
             normal_conversation = 1
