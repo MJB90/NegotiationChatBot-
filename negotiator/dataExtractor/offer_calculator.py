@@ -19,5 +19,3 @@ def run_offer_calculator(customer_name):
     offer = int(score * 15)
     return offer
 
-
-run_offer_calculator("F")
