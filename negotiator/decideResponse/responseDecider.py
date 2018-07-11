@@ -9,11 +9,11 @@ prev_time = 1
 previous_time = 0
 
 
-def response(msg, payment):
+def response(msg, payment, customer_name):
     global is_first, root, normal_conversation, prev_time, previous_time
     if is_first:
         is_first = False
-        root = response_tree.create_tree(payment)
+        root = response_tree.create_tree(payment, customer_name)
         return_msg = root.data
     else:
         affirmative = affirmative_or_negative.check_affirmation(msg)
@@ -33,7 +33,7 @@ def response(msg, payment):
                 previous_time = dt.second
 
             dt = datetime.now()
-            if prev_time == 0 and abs(dt.second - previous_time) > 10:
+            if prev_time == 0 and abs(dt.second - previous_time) > 15:
                 prev_time = 1
                 normal_conversation = 0
                 return_msg = "I am sorry but i was here for something else!"

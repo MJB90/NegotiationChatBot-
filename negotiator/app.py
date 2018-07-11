@@ -23,12 +23,14 @@ def get_bot_response():
 
     user_text = request.args.get('msg')
     payment = 0
+    customer_name = ""
     global is_first
     if is_first:
         is_first = False
         payment = extract_info.run_extract_info(str(user_text))
+        customer_name = str(user_text)
 
-    msg = responseDecider.response(user_text, payment)
+    msg = responseDecider.response(user_text, payment, customer_name)
     if len(msg) > 0:
         return msg
     else:
