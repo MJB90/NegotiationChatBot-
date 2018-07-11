@@ -5,6 +5,7 @@ from dataExtractor import extract_info
 from decideResponse import responseDecider
 
 is_first = True
+customer_name = ""
 app = Flask(__name__)
 
 english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
@@ -20,10 +21,9 @@ def home():
 
 @app.route("/get")
 def get_bot_response():
-
+    global customer_name
     user_text = request.args.get('msg')
     payment = 0
-    customer_name = ""
     global is_first
     if is_first:
         is_first = False

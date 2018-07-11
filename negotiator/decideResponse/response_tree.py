@@ -29,7 +29,7 @@ def create_tree(payment, customer_name):
     root.child['no'].child['yes'] = Tree()
     offer = offer_calculator.run_offer_calculator(customer_name)
     root.child['no'].child['yes'].data = "We are happy to give you an offer of " + str(offer) + \
-                                         " Would you like to make the payment now ?"
+                                         "% Would you like to make the payment now ?"
 
     root.child['no'].child['yes'].child['more'] = Tree()
     root.child['no'].child['yes'].child['more'].data = "Sorry but we don't have any offers for you!" \
@@ -40,6 +40,6 @@ def create_tree(payment, customer_name):
     root.child['no'].child['yes'].child['yes'] = root.child['yes'].child['yes']
     root.child['no'].child['yes'].child['no'] = root.child['yes'].child['no']
 
-    return root
+    return root, offer
 
 

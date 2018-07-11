@@ -1,7 +1,7 @@
 from decideResponse import sentimentCalculator
 
 pos_word = ['yes', 'okay', 'okay!', 'will do']
-neg_words = ['no', 'sorry', "can't"]
+neg_words = ['no', 'sorry', "can't", "don't"]
 
 
 def check_affirmation(sentence):
