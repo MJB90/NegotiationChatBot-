@@ -1,6 +1,6 @@
 from decideResponse import sentimentCalculator
 
-pos_word = ['yes', 'okay', 'okay!', 'will do']
+pos_word = ['yes', 'okay', 'okay!', 'will do', 'might']
 neg_words = ['no', 'sorry', "can't", "don't"]
 
 
