@@ -15,7 +15,8 @@ def create_tree(payment, customer_name):
     root.data = msg
 
     root.child['no'] = Tree()
-    root.child['no'].data = "Would you mind reconsidering your decision for an offer?"
+    root.child['no'].data = "Would you mind reconsidering your " \
+                            "decision for an offer if there is any?"
 
     root.child['yes'] = Tree()
     root.child['yes'].data = "Would you like to make the payment now ?"
@@ -28,14 +29,19 @@ def create_tree(payment, customer_name):
 
     root.child['no'].child['yes'] = Tree()
     offer = offer_calculator.run_offer_calculator(customer_name)
-    root.child['no'].child['yes'].data = "We are happy to give you an offer of " + str(offer) + \
-                                         "% Would you like to make the payment now ?"
+    if offer > 0:
+        root.child['no'].child['yes'].data = "We are happy to give you an offer of " + str(offer) + \
+                                             "% Would you like to make the payment now ?"
+    else:
+        root.child['no'].child['yes'].data = "Sorry currently we don't have any offer for you." \
+                                             "Would you like to make the payment now ?"
 
     root.child['no'].child['yes'].child['more'] = Tree()
-    root.child['no'].child['yes'].child['more'].data = "Sorry but we don't have any offers for you!" \
-                                                       "Will you stick with the current one?"
+    root.child['no'].child['yes'].child['more'].data = "Sorry but we don't have any better offers!" \
+                                                       "Would you like to make the payment now ?"
 
     root.child['no'].child['yes'].child['more'].child['yes'] = root.child['yes'].child['yes']
+    root.child['no'].child['yes'].child['more'].child['yes'] = root.child['yes'].child['no']
 
     root.child['no'].child['yes'].child['yes'] = root.child['yes'].child['yes']
     root.child['no'].child['yes'].child['no'] = root.child['yes'].child['no']

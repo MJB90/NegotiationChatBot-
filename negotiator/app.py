@@ -36,8 +36,6 @@ def get_bot_response():
     else:
         return str(english_bot.get_response(user_text))
 
-    # return str(english_bot.get_response(userText))
-
 
 if __name__ == "__main__":
     app.run()

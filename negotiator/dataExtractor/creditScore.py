@@ -1,4 +1,5 @@
 import os
+import random
 import pandas as pd
 
 
@@ -124,6 +125,12 @@ def run_credit_score():
     scores_frame['name'] = df["PRBA_SEQUENCE_NUMBER"]
     scores_frame['credit_score'] = credit_score
 
+    # Generate random churn scores
+    random_churn = []
+    for i in range(len(credit_score)):
+        random_churn.append(random.randrange(0, 2, 1))
+
+    scores_frame['churn_score'] = random_churn
     saving_path = cwd + "\\data\\score.csv"
     scores_frame.to_csv(saving_path, index=False)
 

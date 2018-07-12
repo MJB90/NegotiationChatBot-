@@ -9,6 +9,8 @@ def check_affirmation(sentence):
     affirmative = -2
     sentence = sentence.lower()
     words = sentence.split()
+
+    # if Asking for better offers return MORE
     for word in words:
         if word in pos_word:
             affirmative = 1

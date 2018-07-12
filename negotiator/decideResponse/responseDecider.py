@@ -1,6 +1,7 @@
 from decideResponse import affirmative_or_negative
 from decideResponse import response_tree
 import datetime
+from datetime import datetime as dat
 import os
 import os.path
 import pandas as pd
@@ -13,7 +14,7 @@ previous_time = 0
 offer = 0
 
 
-def save_data(customer_name, offer):
+def save_data(customer_name, off, wanted_off):
     today = str(datetime.date.today())
     cwd = os.getcwd()
     cwd = cwd.replace("\\dataExtractor", "")
@@ -21,12 +22,12 @@ def save_data(customer_name, offer):
 
     if os.path.isfile(data_path):
         df = pd.read_csv(data_path)
-        df.loc[-1] = [customer_name, today, offer]
+        df.loc[-1] = [customer_name, today, off, wanted_off]
         df.index = df.index + 1
         df.to_csv(data_path, index=False)
     else:
-        df = pd.DataFrame(columns=['customer', 'date', 'offer'])
-        df.loc[-1] = [customer_name, today, offer]
+        df = pd.DataFrame(columns=['customer', 'date', 'offer', 'wanted_offer'])
+        df.loc[-1] = [customer_name, today, off, wanted_off]
         df.index = df.index + 1
         df.to_csv(data_path, index=False)
 
@@ -40,10 +41,14 @@ def response(msg, payment, customer_name):
     else:
         affirmative = affirmative_or_negative.check_affirmation(msg)
 
-        if affirmative == 'YES' and normal_conversation == 0:
+        if root.data == "Sorry currently we don't have any offer for you." \
+                        "Would you like to make the payment now ?":
+            save_data(customer_name, offer, 1)
 
-            if root.data.find("We are happy to give you an offer of"):
-                save_data(customer_name, offer)
+        if affirmative == 'YES' and normal_conversation == 0:
+            if root.data == "We are happy to give you an offer of " + str(offer) + \
+                                             "% Would you like to make the payment now ?":
+                save_data(customer_name, offer, 0)
 
             root = root.child['yes']
 
@@ -56,10 +61,10 @@ def response(msg, payment, customer_name):
             return_msg = ""
             if prev_time:
                 prev_time = 0
-                dt = datetime.now()
+                dt = dat.now()
                 previous_time = dt.second
 
-            dt = datetime.now()
+            dt = dat.now()
             if prev_time == 0 and abs(dt.second - previous_time) > 15:
                 prev_time = 1
                 normal_conversation = 0
