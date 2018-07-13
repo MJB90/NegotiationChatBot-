@@ -12,6 +12,7 @@ normal_conversation = 0
 prev_time = 1
 previous_time = 0
 offer = 0
+offer_asked = 1
 
 
 def save_data(customer_name, off, wanted_off):
@@ -33,7 +34,7 @@ def save_data(customer_name, off, wanted_off):
 
 
 def response(msg, payment, customer_name):
-    global is_first, root, normal_conversation, prev_time, previous_time, offer
+    global is_first, root, normal_conversation, prev_time, previous_time, offer, offer_asked
     if is_first:
         is_first = False
         root, offer = response_tree.create_tree(payment, customer_name)
@@ -41,9 +42,10 @@ def response(msg, payment, customer_name):
     else:
         affirmative = affirmative_or_negative.check_affirmation(msg)
 
-        if root.data == "Sorry currently we don't have any offer for you." \
-                        "Would you like to make the payment now ?":
+        if offer_asked and root.data == "Sorry currently we don't have any offer for you." \
+                                        "Would you like to make the payment now ?":
             save_data(customer_name, offer, 1)
+            offer_asked = 0
 
         if affirmative == 'YES' and normal_conversation == 0:
             if root.data == "We are happy to give you an offer of " + str(offer) + \
