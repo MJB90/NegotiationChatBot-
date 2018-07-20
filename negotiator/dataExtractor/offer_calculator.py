@@ -27,5 +27,3 @@ def run_offer_calculator(customer_name):
     return offer
 
 
-run_offer_calculator("F")
-

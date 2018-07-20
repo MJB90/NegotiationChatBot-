@@ -41,7 +41,7 @@ def create_tree(payment, customer_name):
                                                        "Would you like to make the payment now ?"
 
     root.child['no'].child['yes'].child['more'].child['yes'] = root.child['yes'].child['yes']
-    root.child['no'].child['yes'].child['more'].child['yes'] = root.child['yes'].child['no']
+    root.child['no'].child['yes'].child['more'].child['no'] = root.child['yes'].child['no']
 
     root.child['no'].child['yes'].child['yes'] = root.child['yes'].child['yes']
     root.child['no'].child['yes'].child['no'] = root.child['yes'].child['no']

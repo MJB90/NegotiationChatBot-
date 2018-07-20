@@ -42,21 +42,30 @@ def response(msg, payment, customer_name):
     else:
         affirmative = affirmative_or_negative.check_affirmation(msg)
 
+        # Saving the file with offers
+        #######################################################################
         if offer_asked and root.data == "Sorry currently we don't have any offer for you." \
                                         "Would you like to make the payment now ?":
             save_data(customer_name, offer, 1)
             offer_asked = 0
 
+        if root.data == "We are happy to give you an offer of " + str(offer) + \
+                "% Would you like to make the payment now ?":
+            save_data(customer_name, offer, 0)
+
+        ######################################################################
+
         if affirmative == 'YES' and normal_conversation == 0:
-            if root.data == "We are happy to give you an offer of " + str(offer) + \
-                                             "% Would you like to make the payment now ?":
-                save_data(customer_name, offer, 0)
 
             root = root.child['yes']
-
             return_msg = root.data
+
         elif affirmative == 'NO' and normal_conversation == 0:
             root = root.child['no']
+            return_msg = root.data
+
+        elif affirmative == 'MORE' and normal_conversation == 0:
+            root = root.child['more']
             return_msg = root.data
         else:
             normal_conversation = 1
