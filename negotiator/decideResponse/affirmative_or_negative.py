@@ -4,6 +4,17 @@ pos_word = ['yes', 'okay', 'okay!', 'will', 'might']
 neg_words = ['no', 'sorry', "can't", "don't"]
 more_offer = ['more', 'offer', 'offers', 'better']
 
+'''
+The function below checks whether the response from the customer 
+was a positive response or a negative one based on the keywords.However there is 
+one more tag apart from positive or negative which is the 'more' tag when a customer
+asks for more offers
+
+parameter : the response of the customer
+
+return value : positive ,negative or the more tag
+'''
+
 
 def check_affirmation(sentence):
     sentiment = sentimentCalculator.check_sentiment("sentence")

@@ -4,6 +4,15 @@ import pandas as pd
 isFirst = True
 df = None
 
+'''
+The function below calculates offer based on the customers credit score and 
+churn score and uses the scores.csv file 
+
+parameter : customer's name
+
+return value : the offer given to the customer
+'''
+
 
 def run_offer_calculator(customer_name):
     global isFirst, df

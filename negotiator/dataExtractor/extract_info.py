@@ -16,6 +16,18 @@ def get_data_frame():
     return df
 
 
+'''
+The function below calculates the total dues of the customer.It utilizes the file
+billing_data.csv
+
+parameter :
+The data frame containing the customers data and the name of the customer
+
+return value :
+dues pending
+'''
+
+
 def get_user_details(df, name):
     row = df[df['PRBA_SEQUENCE_NUMBER'] == name]
 

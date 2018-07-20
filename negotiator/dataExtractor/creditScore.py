@@ -2,6 +2,11 @@ import os
 import random
 import pandas as pd
 
+'''
+The below code is used to calculate the credit score for each customer and 
+store in score.csv file .This code also includes storing random churn scores in the score.csv file 
+'''
+
 
 def replace_dates_na(df):
     for i in range(7):

@@ -15,6 +15,20 @@ offer = 0
 offer_asked = 1
 
 
+'''
+The function below saves data if any offer was given to a customer so that 
+future credit scores can be calculated
+
+parameters : customer_name ---> customer currently active
+off ---> how much offer was given to the customer
+wanted_off ---> boolean variable which is 1 if the customer was not eligible 
+                for an offer but still wanted an offer for future reference
+                
+
+return value : none
+'''
+
+
 def save_data(customer_name, off, wanted_off):
     today = str(datetime.date.today())
     cwd = os.getcwd()
@@ -31,6 +45,20 @@ def save_data(customer_name, off, wanted_off):
         df.loc[-1] = [customer_name, today, off, wanted_off]
         df.index = df.index + 1
         df.to_csv(data_path, index=False)
+
+
+'''
+The function below decides what response to be given to the customer and also save data if an
+offer is given to a customer
+
+parameter : 
+msg ---> the response from the customer
+payment ---> dues of the customer
+customer_name ---> the customer chatting with the chat bot
+
+return value : the response to be given to the customer which is extracted
+from the response tree
+'''
 
 
 def response(msg, payment, customer_name):

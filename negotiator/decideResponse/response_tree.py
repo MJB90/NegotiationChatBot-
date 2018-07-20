@@ -7,6 +7,19 @@ class Tree(object):
         self.data = None
 
 
+'''
+The function below creates the map/tree for choosing what response to be returned to
+the customer
+
+parameters: 
+payment ---> how much dues left to pay
+customer_name ---> name of the customer communicating with the chat bot
+
+return value:
+root of the map and the offer eligible for that customer 
+'''
+
+
 def create_tree(payment, customer_name):
     msg = "You have a due of " + str(payment) + " rupees."
     msg += "Are you willing to pay the amount for continued services!"
